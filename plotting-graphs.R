@@ -11,7 +11,6 @@ fig1 <- plot_ly(
   x = c("Good", "Bad"), 
   y = c(length(data$Outcome[data$Outcome == "Good"]), 
         length(data$Outcome[data$Outcome == "Bad"])),  
-  alpha = 0.4, 
   type = "bar", 
   marker = list(color = c("Green", "Red"))
 )

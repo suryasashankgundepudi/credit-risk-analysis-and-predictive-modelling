@@ -10,4 +10,4 @@ df <- read.csv(urlfile, sep = " ", header=FALSE)
 # preview the first 5 rows
 head(df)
 
-write.csv(df, "data/german_credit_data", row.names = FALSE)
+write.csv(df, "data/german_credit_data.csv", row.names = FALSE)
