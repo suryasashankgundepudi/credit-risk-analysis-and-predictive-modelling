@@ -33,7 +33,7 @@ changedataframe <- function(x = "q"){
   if (x == "A11"){
     x = "< 0"
   } 
-  else if (x == "A12"){
+  else if (x == "A12"){ 
     x = "0 <= Checking < 200"
   } 
   else if (x == "A13"){
