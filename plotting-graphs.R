@@ -1,10 +1,17 @@
+# importing the necessary libraries
 library(dplyr)
 library(plotly)
 library(ggplot2)
 
+# reading the clean data set which was created in mutating-data-for-eda.R
 data <- read.csv("data/eda-german-credit.csv")
 
-
+  
+###############################################################################
+#                                                                             #  
+#                 PLOTTING THE CLASS SPLIT OF TARGET VARIABLE                 #
+#                                                                             #
+###############################################################################
 
 fig1 <- plot_ly(
   data = data, 
@@ -23,9 +30,17 @@ fig1 <- fig1 %>%   layout(
   yaxis = list(title = 'Count'), 
   legend = list(title=list(text='Legend Title')))
 
+# Un-comment this line to get the figure
 #fig1
 
 
+###############################################################################
+#                                                                             #  
+#     PLOTTING THE DISTRIBUTION OF AGE FOR GOOD OUTCOME AND BAD OUTCOME       #
+#                                                                             #
+###############################################################################
+
+# Function takes data, feature to plot the distribution of, and separating label
 plot_multi_histogram <- function(df, feature, label_column) {
   
   plt <- ggplot(df, aes(x=eval(parse(text=feature)), 
@@ -44,7 +59,16 @@ plot_multi_histogram <- function(df, feature, label_column) {
 
 fig2 <- plot_multi_histogram(data, "Age.in.Years", "Outcome")
 
+# Un-Comment the following line to print the figure
+# fig2
 
+###############################################################################
+#                                                                             #  
+#            EXPLORING THE CREDIT OF PEOPLE IN DIFFERENT AGE GROUPS           #
+#                                                                             #
+###############################################################################
+
+#Let's look the Credit Amount column
 #Let's look the Credit Amount column
 interval = c(18, 25, 35, 60, 120)
 
@@ -84,10 +108,30 @@ fig3 <- fig3 %>%
       title='Age Categorical'
     ),
     boxmode='group'
-)
+  )
+
+# Un-Comment the following line to print the figure
+# fig3
 
 
+###############################################################################
+#                                                                             #  
+#       LOOKING AT THE RISK WE TAKE FOR DIFFERENT TYPE OF HOME-OWNERRS        #
+#                                                                             #
+###############################################################################
 
+fig4 <- plot_ly(data = data, 
+                x = names(table(data[data$Outcome == "Good", "Housing"])), 
+                y = table(data[data$Outcome == "Good", "Housing"]), 
+                type = 'bar', 
+                name = 'Good Credit')
 
+fig4 <- fig4 %>% 
+  add_trace(y = table(data[data$Outcome == "Bad", "Housing"]), 
+            name = 'Bad Credit')
 
+fig4 <- fig4 %>% 
+  layout(barmode = 'group')
 
+# Un-Comment the following line to print the figure
+fig4

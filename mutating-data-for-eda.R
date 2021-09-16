@@ -21,11 +21,11 @@ columnNames <- c("Checking.Account", "Duration", "Credit.History", "Purpose",
 colnames(df) <- columnNames
 
 
-###########################################################
-#                                                         #  
-#                  CHANGING DATA FOR EDA                  #
-#                                                         #
-###########################################################
+###############################################################################
+#                                                                             #  
+#                             CHANGING DATA FOR EDA                           #
+#                                                                             #
+###############################################################################
 
 # Defining a function to change the values in the data frame
 # This is done using the documentation available at the UCI database
@@ -171,7 +171,7 @@ changedataframe <- function(x = "q"){
   else if (x == "A152"){
     x = "Own"
   }
-  else if (x == "A15"){
+  else if (x == "A153"){
     x = "For Free"
   }
   else if (x == "A171"){
@@ -238,11 +238,11 @@ new_data <- cbind(new_data, per_stat[!names(per_stat) %in% names(new_data)])
 write.csv(new_data, "data/eda-german-credit.csv", row.names = FALSE)
 
 
-###########################################################
-#                                                         #  
-#            CHANGING DATA FOR MACHINE LEARNING           #
-#                                                         #
-###########################################################
+###############################################################################
+#                                                                             #  
+#                    CHANGING DATA FOR MACHINE LEARNING                       #
+#                                                                             #  
+###############################################################################
 
 # Defining a new variable which takes col names of qualitative columns
 catColumns <- c("Checking.Account", "Credit.History", "Purpose", 
