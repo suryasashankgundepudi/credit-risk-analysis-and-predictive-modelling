@@ -102,7 +102,7 @@ changedataframe <- function(x = "q"){
   else if (x == "A64"){
     x = "Savings >=1000"
   }
-  else if (x == "A6"){
+  else if (x == "A65"){
     x = "Unkown/No Savings Account"
   }
   else if (x == "A71"){

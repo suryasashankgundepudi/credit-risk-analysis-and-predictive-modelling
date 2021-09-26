@@ -2,16 +2,25 @@
 library(dplyr)
 library(plotly)
 library(ggplot2)
+library(reshape2)
+library(tidyr)
+library(descr)
+
 
 # reading the clean data set which was created in mutating-data-for-eda.R
 data <- read.csv("data/eda-german-credit.csv")
 
-  
+
+data_good = data.frame(data[data["Outcome"] == 'Good', ])
+data_bad = data.frame(data[data["Outcome"] == 'Bad', ])
+
+
 ###############################################################################
 #                                                                             #  
-#                 PLOTTING THE CLASS SPLIT OF TARGET VARIABLE                 #
+#                        TARGET VARIABLE DISTRIBUTION                         #
 #                                                                             #
 ###############################################################################
+
 
 fig1 <- plot_ly(
   data = data, 
@@ -34,71 +43,80 @@ fig1 <- fig1 %>%   layout(
 #fig1
 
 
+
+
 ###############################################################################
 #                                                                             #  
-#     PLOTTING THE DISTRIBUTION OF AGE FOR GOOD OUTCOME AND BAD OUTCOME       #
+#       LOOKING AT THE RISK WE TAKE FOR DIFFERENT TYPE OF HOME-OWNERRS        #
 #                                                                             #
 ###############################################################################
 
-# Function takes data, feature to plot the distribution of, and separating label
-plot_multi_histogram <- function(df, feature, label_column) {
-  
-  plt <- ggplot(df, aes(x=eval(parse(text=feature)), 
-                        fill=eval(parse(text=label_column)))) +
-    geom_histogram(alpha=0.5, position="identity",  
-                   aes(y = ..density..), color="black") +
-    geom_density(alpha=0.1) +
-    geom_vline(aes(xintercept=mean(eval(parse(text=feature)))), 
-               color="black", linetype="dashed", size=1) +
-    labs(x=feature, 
-         y = "Density") 
-  
-  plt + guides(fill=guide_legend(title=label_column))
-}
+fig2 <- plot_ly(data = data, 
+                x = names(table(data[data$Outcome == "Good", "Housing"])), 
+                y = table(data[data$Outcome == "Good", "Housing"]), 
+                type = 'bar', 
+                name = 'Good Credit')
 
+fig2 <- fig2 %>% 
+  add_trace(y = table(data[data$Outcome == "Bad", "Housing"]), 
+            name = 'Bad Credit')
 
-fig2 <- plot_multi_histogram(data, "Age.in.Years", "Outcome")
+fig2 <- fig2 %>% 
+  layout(barmode = 'group')
 
 # Un-Comment the following line to print the figure
 # fig2
 
+
+
+
 ###############################################################################
 #                                                                             #  
-#            EXPLORING THE CREDIT OF PEOPLE IN DIFFERENT AGE GROUPS           #
+#                             PURPOSE ANALYSIS                                #
 #                                                                             #
 ###############################################################################
 
-#Let's look the Credit Amount column
-#Let's look the Credit Amount column
-interval = c(18, 25, 35, 60, 120)
-
-cats = c('Student', 'Young', 'Adult', 'Senior')
-data["Age_Group"] = cut(data$Age.in.Years, interval, labels=cats)
-
-data_good = data.frame(data[data["Outcome"] == 'Good', ])
-data_bad = data.frame(data[data["Outcome"] == 'Bad', ])
+fig3 <- ggplot(data, aes(x=Purpose, y=Credit.Amount, fill = Purpose)) + 
+  geom_boxplot() + 
+  labs(title="Distribution of Credit VS Purpose",x="Purpose", 
+       y = "Credit ammount (DK)") + 
+  theme_classic() + 
+  theme(axis.text.x = element_text(angle = 10))
 
 
+# Un-Comment the following line to print the figure
+# fig3
 
-fig3 <- plot_ly(
+
+
+
+
+###############################################################################
+#                                                                             #  
+#                        JOB TYPE VS CREDIT AMOUNT                            #
+#                                                                             #
+###############################################################################
+
+
+fig4 <- plot_ly(
   y = data_good$Credit.Amount, 
-  x = data_good$Age_Group, 
+  x = data_good$Job, 
   name="Good credit",
   color = '#3D9970', 
   type = "box"
 )
 
-fig3 <- fig3 %>%
+fig4 <- fig4 %>%
   add_trace(
     y = data_bad$Credit.Amount, 
-    x = data_bad$Age_Group, 
+    x = data_bad$Job, 
     name="Bad credit", 
     color = "Blue", 
     type = "box"
   )
 
 
-fig3 <- fig3 %>%
+fig4 <- fig4 %>%
   layout(
     yaxis=list(
       title='Credit Amount (US Dollar)',
@@ -111,27 +129,76 @@ fig3 <- fig3 %>%
   )
 
 # Un-Comment the following line to print the figure
-# fig3
+# fig4
+
 
 
 ###############################################################################
 #                                                                             #  
-#       LOOKING AT THE RISK WE TAKE FOR DIFFERENT TYPE OF HOME-OWNERRS        #
+#                        JOB TYPE VS CREDIT AMOUNT                            #
 #                                                                             #
 ###############################################################################
 
-fig4 <- plot_ly(data = data, 
-                x = names(table(data[data$Outcome == "Good", "Housing"])), 
-                y = table(data[data$Outcome == "Good", "Housing"]), 
-                type = 'bar', 
-                name = 'Good Credit')
+fig5 <- data %>%
+  plot_ly(type = 'violin') 
+fig5 <- fig5 %>%
+  add_trace(
+    x = data_good$Job,
+    y = data_good$Credit.Amount,
+    legendgroup = 'Good Credit',
+    scalegroup = 'Good Credit',
+    name = 'Good Credit',
+    side = 'negative',
+    box = list(
+      visible = T
+    ),
+    meanline = list(
+      visible = T
+    ),
+    color = I("blue")
+  ) 
+fig5 <- fig5 %>%
+  add_trace(
+    x = data_bad$Job,
+    y = data_bad$Credit.Amount,
+    legendgroup = 'Bad Credit',
+    scalegroup = 'Bad Credit',
+    name = 'Bad Credit',
+    side = 'positive',
+    box = list(
+      visible = T
+    ),
+    meanline = list(
+      visible = T
+    ),
+    color = I("red")
+  ) 
 
-fig4 <- fig4 %>% 
-  add_trace(y = table(data[data$Outcome == "Bad", "Housing"]), 
-            name = 'Bad Credit')
+fig5 <- fig5 %>%
+  layout(
+    xaxis = list(
+      title = ""  
+    ),
+    yaxis = list(
+      title = "",
+      zeroline = F
+    )
+  )
 
-fig4 <- fig4 %>% 
-  layout(barmode = 'group')
+#fig5
 
-# Un-Comment the following line to print the figure
-fig4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
