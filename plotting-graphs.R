@@ -190,13 +190,56 @@ fig5 <- fig5 %>%
 
 
 
+###############################################################################
+#                                                                             #  
+#                        WEALTH ANALYSIS VS OUTCOME                           #
+#                                                                             #
+###############################################################################
+
+
+
+trace5 <- plot_ly(data = data, 
+                  x = names(table(data[data$Outcome == "Good", "Savings.Account.Bonds"])), 
+                  y = table(data[data$Outcome == "Good", "Savings.Account.Bonds"]), 
+                  type = 'bar', 
+                  name = 'Good Credit')
+
+fig6 <- trace5 %>% 
+  add_trace(y = table(data[data$Outcome == "Bad", "Savings.Account.Bonds"]), 
+            name = 'Bad Credit')
+
+fig6 <- fig6 %>% 
+  layout(barmode = 'group')
+
+
+fig6
 
 
 
 
+###############################################################################
+#                                                                             #  
+#                        CREDIT HISTORY VS OUTCOME                            #
+#                                                                             #
+###############################################################################
 
 
 
+trace5 <- plot_ly(data = data, 
+                  x = names(table(data[data$Outcome == "Good", "Credit.History"])), 
+                  y = table(data[data$Outcome == "Good", "Credit.History"]), 
+                  type = 'bar', 
+                  name = 'Good Credit')
+
+fig7 <- trace5 %>% 
+  add_trace(y = table(data[data$Outcome == "Bad", "Credit.History"]), 
+            name = 'Bad Credit')
+
+fig7 <- fig7 %>% 
+  layout(barmode = 'group')
+
+
+fig7
 
 
 
