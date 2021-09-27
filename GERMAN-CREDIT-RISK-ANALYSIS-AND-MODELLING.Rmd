@@ -3,23 +3,60 @@ title: "GERMAN CREDIT RISK ANALYSIS AND PREDICTIVE MODELLING"
 author: "Surya Sashank Gundepudi"
 date: "9/26/2021"
 output:
-  html_document: default
-  pdf_document: default
+  html_document: 
+    toc : TRUE
+    toc_float : TRUE
+    theme : "paper"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Abstract
+Currently there are many machine learning models that have been deployed to 
+predict whether if a person will default their loan amount or they will pay it
+back. These decisions are made using predictive modelling and ML by using 
+various factors of the person, such as their education level, sex, 
+personal status, checking amount, number of savings bonds and many 
+more. The aim of this project to use one of such publicly available datasets, 
+the *Statlog - German Credit Risk Dataset* which has anonymized data of many 
+customers of a bank, with their personal details and whether if they had defaulted
+their loan amount or they were good customers and paid back their loan amount. 
+Within this project we aim to first pre-process the data into both user readable 
+and machine readable format, explore the data and try to derive inferences, and 
+finally use this to predict whether if a person will default their loan or not. 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+**Keywords** - German-Credit-Risk, Machine-Learning, Predictive Modelling
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Introduction
+Most banks' main source of income is from providing loans for their customers. 
+They store people's money and pay them some interest on that money, and to some
+other customers they provide a loan for a purpose at a higher interest than 
+before. This margin between the saving interest and loan interest is where banks
+make most of their money. 
 
-```{r cars}
-summary(cars)
-```
+But every time a bank provides a loan it is facing a risk of the loan not being 
+paid back. Generally, banks take some type of collateral such as a person's 
+property. However, most banks would want to even avoid providing a person who
+will default their loan since they are losing money and time value of money. 
+In that time they could have invested in a loan to a person who will pay their
+loan. 
+
+Therefore, it is crucial to determine whether if a person is a defaulter or 
+someone who will pay back their loan before the bank even provides the loan. In
+this project I try to pre-process the data, then plot graphs using the powerful 
+R Programming Language and the *plotly* package. Using these graphs I will try 
+to derive inferences from these plots and finally use the data to build a machine
+learning model that predicts whether if a person will be a defaulter or not. 
+
+## Dataset Description 
+
+This dataset was provided by Dr. Hand Hoffmann from the University of Hamburg 
+(Universit"at Hamburg). It is publicily available for data scientists to use at the 
+[UCI MACHINE LEARNING REPOSITOY](https://archive.ics.uci.edu/ml/index.php). The
+direct link to the dataset, with both numeric and the true data, is at -  [STATLOG-GERMAN-CREDIT](https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data))
+
 
 ## Including Plots
 
