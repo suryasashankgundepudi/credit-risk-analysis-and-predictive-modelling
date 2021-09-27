@@ -1,0 +1,62 @@
+---
+title: "GERMAN CREDIT RISK ANALYSIS AND PREDICTIVE MODELLING"
+author: "Surya Sashank Gundepudi"
+date: "9/26/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+Testing plotly
+
+```{r, echo=FALSE, include=FALSE}
+library(dplyr)
+library(plotly)
+library(ggplot2)
+library(reshape2)
+library(tidyr)
+library(descr)
+
+data <- read.csv("data/eda-german-credit.csv")
+fig1 <- plot_ly(
+  data = data, 
+  x = c("Good", "Bad"), 
+  y = c(length(data$Outcome[data$Outcome == "Good"]), 
+        length(data$Outcome[data$Outcome == "Bad"])),  
+  type = "bar", 
+  marker = list(color = c("Green", "Red"))
+)
+
+fig1 <- fig1 %>%   layout(
+  title = 'Target Variable Distribution', 
+  xaxis = list(title = 'Outcome of Risk Taken'), 
+  font=t, 
+  plot_bgcolor = "#e5ecf6",
+  yaxis = list(title = 'Count'), 
+  legend = list(title=list(text='Legend Title')))
+
+```
+
+Now including the plot
+```{r}
+# Un-comment this line to get the figure
+fig1
+```
