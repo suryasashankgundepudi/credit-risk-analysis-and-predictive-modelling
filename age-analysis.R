@@ -49,7 +49,6 @@ fig1 <- plot_multi_histogram(data, "Age.in.Years", "Outcome")
 ###############################################################################
 
 #Let's look the Credit Amount column
-#Let's look the Credit Amount column
 interval = c(18, 25, 35, 60, 120)
 
 cats = c('Young', 'Young Adult', 'Adult', 'Senior')
