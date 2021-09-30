@@ -6,6 +6,7 @@ output:
   html_document: 
     toc : TRUE
     toc_float : TRUE
+    number_sections: true
     theme : "journal"
 ---
 
@@ -28,7 +29,7 @@ library(stringr)
 
 ```
 
-## Abstract
+# Abstract
 Currently there are many machine learning models that have been deployed to 
 predict whether if a person will default their loan amount or they will pay it
 back. These decisions are made using predictive modelling and ML by using 
@@ -45,7 +46,7 @@ finally use this to predict whether if a person will default their loan or not.
 **Keywords** - German-Credit-Risk, Machine-Learning, Predictive Modelling
 
 
-## Introduction
+# Introduction
 
 Most banks' main source of income is from providing loans for their customers. 
 They store people's money and pay them some interest on that money, and to some
@@ -75,7 +76,7 @@ and predicts whether if a person can be provided with a loan or not.
 **SHINY WEB APP: YET TO BE DEVELOPED**
 
 
-### About the Various Aspects of the project
+## About the Various Aspects of the project
 1. **Packages Required**
   + RCurl
   + dplyr
@@ -99,7 +100,7 @@ and predicts whether if a person can be provided with a loan or not.
 
 
 
-## Dataset Description 
+# Dataset Description 
 
 This dataset was provided by Dr. Hand Hoffmann from the University of Hamburg 
 (Universit"at Hamburg). It is publicly available for data scientists to use at the 
@@ -139,11 +140,11 @@ the risk taken was good and the person was not a defaulter and 0 if the person
 was a defaulter. 
 
 
-## Data Pre-Processing
+# Data Pre-Processing
 Within this section I will cover some of the basic data-preprocessing techniques
 I had employed to get to a more understandable and descriptive data. 
 
-### Reading the data. 
+## Reading the data. 
 The data was first read from the UCI- machine learning repository using the 
 following chunck of code. The required package for this chunk is *RCurl*
 
@@ -169,7 +170,7 @@ The table below shows how the data looks without any kind of pre-processing
 knitr::kable(df[1:5,], caption = "The Raw Data.")
 ```
 
-### Mutating the data
+## Mutating the data
 
 As you can see the data does not have any type of column names, and the data by 
 itself does not have names, but is instead in the form of various categorical 
@@ -228,7 +229,7 @@ knitr::kable(machine_data[1:5, 1:7], caption = "Machine Readable Data")
 ```
 
 
-## Exploratory Data Analysis
+# Exploratory Data Analysis
 
 Since the data is now more descriptive, I attempted to plot various graphs, most of
 which are interactive to derive inferences. There are major parts of this
@@ -279,7 +280,7 @@ who paid back their credits duely it is still a high ratio and it is our aim to
 reduce the number of defaulted loan decisions. 
 
 
-### Gender Analysis
+## Gender Analysis
 
 To get an idea of how the population of our dataset was distributed I plotted a 
 histogram that shows the distribution of the age group across the two genders and
@@ -488,7 +489,7 @@ number of men and women.
 * Males tend to have lower percentage of bad risk than women. 
 
 
-### Age Analysis
+## Age Analysis
 
 In the age analysis module I attempted to see if the various age groups have better or
 lesser risk. I also try to look at the credit ammount distribution but I do not 
@@ -768,9 +769,9 @@ who have the lowest ratio of good to bad risk outcomes.
 * Adults have the highest ratio of Good to Bad credit 
 * Seniors have the lowest ratio of Good to Bad credit. 
 
-### Wealth and Job Analysis
+## Wealth and Job Analysis
 
-#### Wealth Analysis
+### Wealth Analysis
 
 Here I try to understand how people from different wealth classes are distributed
 in our data-set. 
@@ -837,7 +838,7 @@ fig7
 ```
 
 
-### Job Analysis
+## Job Analysis
 
 For the data provided, the job attribute is split into different levels of skill
 and industry. In this analysis I plotted 2 different plots. One with the different
@@ -967,7 +968,7 @@ be a convenience dataset.
 of credit in DMK, and they have equal distribution of people with a good and bad 
 outcome. 
 
-### Miscellaneous Plots
+## Miscellaneous Plots
 
 The following two graphs are plotted majorly look at the distribution of various 
 types of *home owners* in good and bad outcomes. 
@@ -1034,19 +1035,75 @@ their loan.
 **predictive modelling using various machine learning techniques**
 
 
-## Predictive Modelling 
+# Predictive Modelling 
+
+Within this section I employed various machine learning algorithms to classify 
+whether if a person will default their loan or not. For predictive modelling
+I had employed the *Python Programming Language* to implement ML algorithms
+because of its better support for the same. 
+
+Some of the algorithms I used are
+
+* Logistic Regression
+* Random Forest
+* Decision Trees
+* K Nearest Neighbors
+* Linear Discriminant Analysis
+* Quadratic Discriminant Analysis
+* XGBoost
+
+We will be looking at the precision, recall and f1 score for these algorithms. 
+The code for this can be found in the interactive python notebook at the project
+repository
 
 
+## Results 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+RESULTS <- tibble::tribble(
+         ~NAME.OF.ML.ALGORITHM.USED, ~PRECISION.0, ~PRECISION.1, ~RECALL.0, ~RECALL.1, ~F1.SCORE.0, ~F1.SCORE.1,
+                   "DECISION TREES",         0.77,         0.39,    "0.71",      0.46,        0.74,        0.42,
+              "LOGISTIC REGRESSION",         0.79,         0.65,    "0.91",      0.42,        0.85,        0.51,
+                    "RANDOM FOREST",         0.78,         0.66,  "0.92 0",      0.38,        0.85,        0.48,
+                          "XGBOOST",         0.82,         0.69,     "0.9",      0.51,        0.86,        0.59,
+  "QUADRATIC DISCRIMINANT ANALYSIS",         0.83,         0.57,    "0.82",      0.58,        0.82,        0.58,
+       "SUPPORT VECTOR CLASSIFIERS",         0.77,         0.66,    "0.94",      0.29,        0.84,         0.4
+  )
+
+require(knitr)
+require(kableExtra)
+kable_styling(
+              kable(RESULTS, digits = 3, row.names = FALSE, align = "c",
+              caption = NULL, format = "html"),
+        bootstrap_options = c("striped", "hover", "condensed"),
+        position = "center", full_width = FALSE) 
 
 
+```
+
+Though the results are not as great I hope to implement a fine tuned Deep 
+learning model that provides us with better results. 
 
 
+# Conclusions 
+The German Credit data was read from the UCU machine learning repository. Initial
+data pre-processing was implemented to bring about clean and understandable data. 
+Then the data was used to perform exploratory data analysis and derive inferences. 
+Finally the machine ready data was scaled and used for predicting if a person would
+default their loans or not. Various machine learning algorithms were used for this 
+purpose and the XGBoost model performed the best compared to other algorithms. 
 
+# Future Work
+Right now I am a little busy with my Senior year at college, and I wish to in the 
+future make a deep learning algorithm for this data. We can also implement the trained
+algorithms for a Shiny Web application. But most of all, I wish to implement the machine 
+learning algorithms using R Programming. Since the data is also not representative
+one could implement data augmentation to make the data more descriptive. 
 
+# References
 
-
-
-
+1. UCI Machine learning dataset - [Link](https://archive.ics.uci.edu/ml/datasets/statlog+(german+credit+data)
+2. Caret - [LINK](https://www.machinelearningplus.com/machine-learning/caret-package/#31howtosplitthedatasetintotrainingandvalidation)
+3. Kaggle.com [LINK](https://www.kaggle.com/uciml/german-credit)
 
 
 

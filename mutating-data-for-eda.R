@@ -260,5 +260,8 @@ for (column in catColumns){
   tf_data[, column] <- label$fit_transform(tf_data[, column])
 }
 
+
+
+
 write.csv(tf_data, "data/machine-ready-credit.csv", row.names = FALSE)
 

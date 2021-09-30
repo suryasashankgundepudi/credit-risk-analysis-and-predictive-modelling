@@ -5,3 +5,5 @@
 data/
 german-credit-risk-modelling.Rproj
 rsconnect/
+predictive-modelling.R
+.ipynb_checkpoints
