@@ -1,7 +1,7 @@
 ---
 title: "GERMAN CREDIT RISK ANALYSIS AND PREDICTIVE MODELLING"
 author: "Surya Sashank Gundepudi"
-date: "9/26/2021"
+date: "10/16/2021"
 output:
   html_document: 
     toc : TRUE
@@ -30,43 +30,42 @@ library(stringr)
 ```
 
 # Abstract
-Currently there are many machine learning models that have been deployed to 
-predict whether if a person will default their loan amount or they will pay it
-back. These decisions are made using predictive modelling and ML by using 
-various factors of the person, such as their education level, sex, 
-personal status, checking amount, number of savings bonds and many 
-more. The aim of this project to use one of such publicly available datasets, 
-the *Statlog - German Credit Risk Dataset* which has anonymized data of many 
-customers of a bank, with their personal details and whether if they had defaulted
-their loan amount or they were good customers and paid back their loan amount. 
-Within this project I aim to first pre-process the data into both user readable 
-and machine readable format, explore the data and derive inferences, and 
-finally use this to predict whether if a person will default their loan or not. 
+Currently, many machine learning models have been deployed to predict whether a 
+person will default their loan amount or they will pay it back. These decisions 
+are made using predictive modeling and ML by using various factors, such as their 
+education level, sex, personal status, checking the amount, number of savings 
+bonds, and many more. This project aims to use one of such publicly available datasets, 
+the *Statlog - German Credit Risk Dataset*, which has anonymized data of many 
+bank customers, with their details and whether they had defaulted their loan amount 
+or they were good customers and paid back their loan amount. Within this project, 
+I aim to first pre-process the data into both user's readable and machine readable 
+format, explore the data and derive inferences, and finally use this to predict 
+whether if a person will default their loan or not.
+ 
 
 **Keywords** - German-Credit-Risk, Machine-Learning, Predictive Modelling
 
 
 # Introduction
 
-Most banks' main source of income is from providing loans for their customers. 
+Most banks' primary source of income is from providing loans for their customers. 
 They store people's money and pay them some interest on that money, and to some
-other customers they provide a loan for a purpose at a higher interest than 
-before. This margin between the saving interest and loan interest is where banks
+other customers, provide a loan for a purpose at a higher interest than before. 
+This margin between the saving interest and the loan interest is where banks
 make most of their money. 
 
-But every time a bank provides a loan it is facing a risk of the loan not being 
-paid back. Generally, banks take some type of collateral such as a person's 
-property. However, most banks would want to even avoid providing a person who
-will default their loan since they are losing money and time value of money. 
-In that time they could have invested in a loan to a person who will pay their
-loan. 
+However, every time a bank provides a loan, it faces a risk of the loan not being 
+paid back. Generally, banks take some collateral, such as a person's property. 
+However, most banks would want even to avoid providing a person who will default 
+their loan since they are losing money and time value of money. In that time, they 
+could have invested in a loan to a person who would pay their loan. 
 
-Therefore, it is crucial to determine whether if a person is a defaulter or 
-someone who will pay back their loan before the bank even provides the loan. In
-this project I  pre-processed the data, then plot graphs using the powerful 
-R Programming Language and the *plotly* package. Using these graphs I have also
-derived inferences from these plots and finally use the data to build a machine
-learning model that predicts whether if a person will be a defaulter or not. 
+Therefore, it is crucial to determine whether a person is a defaulter or someone 
+who will pay back their loan before the bank even provides the loan. In
+In this project, I  pre-processed the data, then plotted graphs using the powerful. 
+R Programming Language and the *plotly* package. Using these graphs, I have also
+derived inferences from these plots and finally used the data to build a machine
+a learning model that predicts whether if a person will be a defaulter or not. 
 
 I also wish to make a Shiny web application that takes all of the required data
 and predicts whether if a person can be provided with a loan or not. 
@@ -172,16 +171,16 @@ knitr::kable(df[1:5,], caption = "The Raw Data.")
 
 ## Mutating the data
 
-As you can see the data does not have any type of column names, and the data by 
-itself does not have names, but is instead in the form of various categorical 
+As you can see, the data does not have any column names and the data by 
+itself does not have names but is instead in the form of various categorical 
 columns. 
 
-Since the data by itself cannot  be used for any type of exploratory data analysis, 
-I had used a switch case type of code to provide names for each and every data
-point in the data. For my reference I had used the German.doc provided at the UCI
-machine learning repository. The file contained a detailed description of each
-and every attribute and what each value meant. For getting a better understanding
-of the rudimentary yet robust code I had employed please visit the project page 
+Since the data by itself cannot  be used for any exploratory data analysis, 
+I had used a switch case type of code to provide names for each data
+point in the data. For my reference, I had used the German.doc provided at the UCI
+machine learning repository. The file contained a detailed description of each 
+attribute and what each value meant. For getting a better understanding
+of the rudimentary yet robust code I had employed, please visit the project page 
 at - [German-credit-Risk-Repo](https://github.com/suryasashankgundepudi/german-credit-risk-modelling),
 
 Now after cleaning the data for exploratory data analysis I was able to get to a 
@@ -192,10 +191,10 @@ data <- read.csv("data/eda-german-credit.csv")
 knitr::kable(data[1:5, 1:7], caption = "Clean Data")
 ```
 
-However, for the later part of this project I also had to make sure the data was
-in a machine readable format. This was completed using the *superML* package
-available in R. The following R-Code chunk helps us convert this characted based
-dataframe into numeric data for predictive modelling. 
+However, I also had to make sure the data was in a machine readable format for 
+the later part of this project. The preprocessing was completed using the *superML* 
+package in R. The following R-Code chunk helps us convert this character-based
+data frame into numeric data for predictive modeling. 
 
 ```{r making-machine-readble-data, echo=TRUE, include=TRUE}
 # Reading the clean data. 
@@ -232,16 +231,16 @@ knitr::kable(machine_data[1:5, 1:7], caption = "Machine Readable Data")
 # Exploratory Data Analysis
 
 Since the data is now more descriptive, I attempted to plot various graphs, most of
-which are interactive to derive inferences. There are major parts of this
+which are interactive to derive inferences. There are significant parts of this
 data analysis module.
 
 * Gender Analysis
 * Age Analysis
 * Wealth and Job Analysis 
 
-Each of these categories aim to provide a better understanding of the distribution
+Each of these categories aims better to understand the distribution
 of the data across various demographics. There are also some miscellaneous plots 
-I have included, which I thought would help me derive more inferences. 
+I have included, which I thought would help me derive other inferences. 
 
 I initially wanted to understand the target variable's (whether if the loan provided
 was a good decision or a bad one) distribution. The bar graph shown below lets
@@ -274,19 +273,19 @@ fig1 <- fig1 %>%   layout(
 fig1
 ```
 
-From this graph we understand that there is a class imbalance in our target variable. 
+From this graph, we understand that there is a class imbalance in our target variable. 
 Though the number of people who defaulted their loan is lesser than the customers
-who paid back their credits duely it is still a high ratio and it is our aim to
+who paid back their credits duly it is still a high ratio, and it is our aim to
 reduce the number of defaulted loan decisions. 
 
 
 ## Gender Analysis
 
-To get an idea of how the population of our dataset was distributed I plotted a 
+To get an idea of how the population of our dataset was distributed, I plotted a 
 histogram that shows the distribution of the age group across the two genders and
 as a whole. 
 
-```{r code-graph-age-vs-gender  , echo = FALSE, include=FALSE}
+```{r code-graph-age-vs-gender  , echo = TRUE, include=TRUE}
 data_age = data[, "Age.in.Years"]
 age_male = data[data$Sex == "Male ", "Age.in.Years"]
 age_female = data[data$Sex == "Female ", "Age.in.Years"]
@@ -352,7 +351,7 @@ In the next plot I plot the reasons why men and women take a loan.
 To visualize this I have plotted a horizontal grouped bar graph that shows the 
 distribution of men and women across various purposes. 
 
-```{r code-graph-gender-vs-purpose  , echo = FALSE, include=FALSE}
+```{r code-graph-gender-vs-purpose  , echo = TRUE, include=TRUE}
 purpose_list <- c(" New Car", "Business", "Domestic Appliances", "Education",         
                   "Furniture/Equipment", "Others", "Radio or Television",
                   "Repairs", "Retraining", "Used Car")
@@ -383,7 +382,7 @@ fig2 <- trace0 %>%  add_trace(
                             width = 1.5))
 )
 fig2 <- fig2 %>% layout(
-  yaxis = list(title = 'Count'), 
+  yaxis = list(title = 'Reason'), 
   xaxis = list(title = "Percentage of Gender"), 
   barmode = 'group'
 )
@@ -397,16 +396,16 @@ fig2
 
 The graph is plotted by taking the percentage of the number of men and women for 
 different purposes, and then plotting them side by side.
-From this it is inferred that in general, for all categories other than 
+From this, it is inferred that in general, for all categories other than 
 *furniture* and *domestic appliances*, there is a higher percentage of men
 who take a loan than women.
 
 
-In the next graph I plot the distribution of the credit amount that 
-men and women have in their bank accounts. The x axis plots the amount of money in
-Deutsche Mark and the y axis plots the count of the same. 
+In the following graph, I plot the distribution of the credit amount that men and 
+women have in their bank accounts. The x-axis plots the amount of money in
+Deutsche Mark and the y axis plot the count of the same. 
 
-```{r code-graph-sex-vs-credit  , echo = FALSE, include=FALSE}
+```{r code-graph-sex-vs-credit  , echo = TRUE, include=TRUE}
 trace3 <- ggplot(data[data$Sex == "Male ", ], aes(x =Credit.Amount)) + 
   geom_histogram(alpha=0.5, position="identity",  bins = 50, 
                  color="blue", fill = "lightblue") + 
@@ -433,8 +432,7 @@ fig3
 ```
 
 It could be hypothesized that the gender of a person does not affect their credit 
-amount and that majority of the population has a credit amount in between 
-1000 DMK and 2500 DMK. 
+amount and that majority of the population has a credit amount between 1000 DMK and 2500 DMK. 
 
 
 
@@ -443,7 +441,7 @@ loan outcome. The next plot shows the count of men and women who have good and
 bad outcomes respectively. 
 
 
-```{r code-graph-sex-vs-risk  , echo = FALSE, include=FALSE}
+```{r code-graph-sex-vs-risk  , echo = TRUE, include=TRUE}
 
 ###############################################################################
 #                                                                             #  
@@ -462,7 +460,9 @@ fig5 <- trace5 %>%
             name = 'Bad Credit')
 
 fig4 <- fig5 %>% 
-  layout(barmode = 'group')
+  layout(xaxis = list(title = 'Reason'),
+         yaxis = list(title = 'Count'),
+         barmode = 'group')
 
 
 
@@ -477,10 +477,9 @@ fig4
 ```
 
 
-It could be understood from the above plot that men in general have a higher ratio
-of good to bad outcome than women. However, the data might not be completely 
-representative of the general population as there is an imbalance between  the 
-number of men and women.
+It could be understood from the above plot that men, in general, have a higher 
+ratio of good to bad outcomes than women. However, the data might not entirely 
+represent the general population as there is an imbalance between men and women.
 
 **Summary of Gender Analysis** 
 
@@ -491,9 +490,9 @@ number of men and women.
 
 ## Age Analysis
 
-In the age analysis module I attempted to see if the various age groups have better or
-lesser risk. I also try to look at the credit ammount distribution but I do not 
-look at outliers as much in this analysis.
+I attempted to see if the various age groups have better or lesser risk in the 
+age analysis module. I also try to look at the credit amount distribution, but 
+I do not look at outliers in this analysis.
 
 The population  has been split into 4 mmajor age groups equaly. 
 
@@ -505,7 +504,7 @@ The population  has been split into 4 mmajor age groups equaly.
 For our first plot I plotted a stacked histogram with age distribution for 
 people with good and bad credit. 
 
-```{r code-graph-age-good-bad  , echo = FALSE, include=FALSE}
+```{r code-graph-age-good-bad  , echo = TRUE, include=TRUE}
 
 # Function takes data, feature to plot the distribution of, and separating label
 plot_multi_histogram <- function(df, feature, label_column) {
@@ -537,17 +536,15 @@ fig1
 
 
 
-It can be inferred from this graph that majority of the younger population are 
-the people with bad risk. However, the graph is also right skewed for good credit.
+It can be inferred from this graph that most of the younger population are the 
+people with a bad risk. However, the graph is also right-skewed for good credit.
 
-However, the age group of people with good credit lie in their late 20s and 
-early 30s. 
+However, the age group of people with good credit lie in their late 20s and early 30s. 
 
-The next graph is a box plot of various age groups against credit amount. This 
-way I will be able to see if different age groups are more or less rich than the
-other groups. 
+The following graph is a box plot of various age groups against the credit amount. 
+This way, I will see if different age groups are more or less affluent than the other groups. 
 
-```{r code-graph-age-group-credit  , echo = FALSE, include=FALSE}
+```{r code-graph-age-group-credit  , echo = TRUE, include=TRUE}
 #Let's look the Credit Amount column
 interval = c(18, 25, 35, 60, 120)
 
@@ -602,13 +599,13 @@ fig2
 ```
 
 
-Young adults and Adults have a higher credit than other age groups. This also 
-shows that in general people with lesser credit amount have bad outcome. 
+Young adults and adults have a higher credit than other age groups. The graph also 
+shows that, in general, people with lesser credit amounts have bad outcomes. 
 
 Another representation of the same is a violin plot as shown below. The violin
 plot also provides us with similar inferences as the box plot. 
 
-```{r code-graph-age-group-credit-violin  , echo = FALSE, include=FALSE}
+```{r code-graph-age-group-credit-violin  , echo = TRUE, include=TRUE}
 fig3 <- data %>%
   plot_ly(type = 'violin') 
 fig3 <- fig3 %>%
@@ -646,11 +643,9 @@ fig3 <- fig3 %>%
 
 fig3 <- fig3 %>%
   layout(
-    xaxis = list(
-      title = ""  
-    ),
+    xaxis = list(title = "Age Categories"),
     yaxis = list(
-      title = "",
+      title = "Credit Amount",
       zeroline = F
     )
   )
@@ -667,7 +662,7 @@ fig3
 Finally I plot a stacked bar graph against good and bad loans for different age
 groups to understand the ratio of good and bad credits.
 
-```{r code-graph-age-group-outcome , echo = FALSE, include=FALSE}
+```{r code-graph-age-group-outcome , echo = TRUE, include=TRUE}
 young_good = sum(na.omit(data_good$Credit.Amount[data$Age_Group == "Young"]))
 young_bad = sum(na.omit(data_bad$Credit.Amount[data$Age_Group == "Young"]))
 
@@ -758,9 +753,9 @@ overall_loan
 ```
 
 
-From this graph it is understood that young adults have the highest ratio of
-good to bad risk outcomes. On the other hand, seniors are surprisingly the ones
-who have the lowest ratio of good to bad risk outcomes.
+From this graph, it is understood that young adults have the highest ratio of 
+good to bad risk outcomes. On the other hand, seniors surprisingly have the lowest 
+ratio of good to bad risk outcomes.
 
 **Summary of Age Analysis**
 
@@ -773,10 +768,10 @@ who have the lowest ratio of good to bad risk outcomes.
 
 ### Wealth Analysis
 
-Here I try to understand how people from different wealth classes are distributed
-in our data-set. 
+Within this section I try to understand how people from different wealth classes 
+are distributed in our data-set. 
 
-```{r code-graph-wealth-vs-outcome  , echo = FALSE, include=FALSE}
+```{r code-graph-wealth-vs-outcome  , echo = TRUE, include=TRUE}
 
 trace5 <- plot_ly(data = data, 
                   x = names(table(data[data$Outcome == "Good", "Savings.Account.Bonds"])), 
@@ -789,7 +784,9 @@ fig6 <- trace5 %>%
             name = 'Bad Credit')
 
 fig6 <- fig6 %>% 
-  layout(barmode = 'group')
+  layout(xaxis = list(title = 'Number of Bonds'),
+         yaxis = list(title = 'Count'),
+         barmode = 'group')
 
 
 
@@ -803,15 +800,15 @@ fig6
 ```
 
 
-Surprisingly people from the higher class, ie with more amount in savings have 
-lower ratio of good to bad outcomes. Also, people from the lower savings sector
-have a higher ratio of good to bad credit. However, the highest class of people
-have the highest good to bad credit ratio. 
+Surprisingly people from the higher class, i.e., with more savings, have a lower 
+ratio of good to bad outcomes. Also, people from the lower savings sector have a 
+higher ratio of good to bad credit. However, the highest class of people have the 
+highest good to bad credit ratio. 
 
 A similar distribution can be seen based on people of different types of credit 
 payment.
 
-```{r code-graph-credit-payment  , echo = FALSE, include=FALSE}
+```{r code-graph-credit-payment  , echo = TRUE, include=TRUE}
 
 
 trace5 <- plot_ly(data = data, 
@@ -838,13 +835,13 @@ fig7
 ```
 
 
-## Job Analysis
+### Job Analysis
 
 For the data provided, the job attribute is split into different levels of skill
-and industry. In this analysis I plotted 2 different plots. One with the different
-types of job and their credit amount. 
+and industry. In this analysis, I plotted two different plots. One with the 
+different types of jobs and their credit amount. 
 
-```{r code-graph-job-credit-outcome  , echo = FALSE, include=FALSE}
+```{r code-graph-job-credit-outcome  , echo = TRUE, include=TRUE}
 
 fig5 <- data %>%
   plot_ly(type = 'violin') 
@@ -905,7 +902,7 @@ fig5
 
 
 
-```{r code-graph-random  , echo = FALSE, include=FALSE}
+```{r code-graph-random  , echo = TRUE, include=TRUE}
 
 fig4 <- plot_ly(
   y = data_good$Credit.Amount, 
@@ -947,13 +944,13 @@ fig4
 ```
 
 
-It can be postulated from the two graphs above that Self employed or highly 
-qualified professionals have high good and bad outcome. The people with high
-credit amount are also people in the highly qualified or self employed professionals.
-It is my opinion that since this part of this attribute incluede self emplyed 
-people, they might take loans for their businesses and these businesses might 
-not have been able to pay back their loan. This might also explain why they have
-so much credit amount. 
+It can be postulated from the two graphs above that Self-employed, or highly 
+qualified professionals have high good and bad outcomes. The people with high 
+credit amounts are also people in highly qualified or self-employed professionals. 
+It is my opinion that since this part of this attribute includes self-employed people, 
+they might take loans for their businesses, and these businesses might not have 
+been able to pay back their loans. The previous statement might also explain why 
+they have so much credit amount. 
 
 
 **Summary of Wealth and Job Analysis**
@@ -973,7 +970,7 @@ outcome.
 The following two graphs are plotted majorly look at the distribution of various 
 types of *home owners* in good and bad outcomes. 
 
-```{r code-graph-home-owners  , echo = FALSE, include=FALSE}
+```{r code-graph-home-owners  , echo = TRUE, include=TRUE}
 
 fig2 <- plot_ly(data = data, 
                 x = names(table(data[data$Outcome == "Good", "Housing"])), 
@@ -986,7 +983,9 @@ fig2 <- fig2 %>%
             name = 'Bad Credit')
 
 fig2 <- fig2 %>% 
-  layout(barmode = 'group')
+  layout(xaxis = list(title = 'Housing Type'),
+         yaxis = list(title = 'Count'),
+         barmode = 'group')
 
 
 
@@ -1004,7 +1003,7 @@ for a loan payment, and that home owners have highest ratio of the same.
 Finally, to understand why people wish to take up the loan I plotted various
 box plots. The graph is as shown below. 
 
-```{r code-graph-purpose  , echo = FALSE, include=FALSE}
+```{r code-graph-purpose  , echo = TRUE, include=TRUE}
 
 fig3 <- ggplot(data, aes(x=Purpose, y=Credit.Amount, fill = Purpose)) + 
   geom_boxplot() + 
@@ -1024,11 +1023,11 @@ fig3
 ```
 
 
-Though majority of the population who take up loans for other purpose take up the
-highest amount of money for their loans. It can also be seen that the next type 
-of people to take up loans are the ones who wish to pay their car loans. The people
-who take up loans for domestic appliances are the ones who take lowest amount for 
-their loan. 
+Though most of the population who take up loans for other purposes take up the 
+highest amount of money for their loans. It can also be seen that the following 
+type of people to take up loans are the ones who wish to pay their car loans. The 
+people who take up loans for domestic appliances are the ones who take the lowest 
+amount for their loan. 
 
 
 **This concludes our Exploratory data analysis section. We will now move on to **
@@ -1080,24 +1079,24 @@ kable_styling(
 
 ```
 
-Though the results are not as great I hope to implement a fine tuned Deep 
-learning model that provides us with better results. 
+Though the results are not as great, I hope to implement a fine-tuned Deep-learning 
+model that provides us with better results. 
 
 
 # Conclusions 
-The German Credit data was read from the UCU machine learning repository. Initial
+The German Credit data was read from the UCU machine learning repository. Initial 
 data pre-processing was implemented to bring about clean and understandable data. 
-Then the data was used to perform exploratory data analysis and derive inferences. 
-Finally the machine ready data was scaled and used for predicting if a person would
-default their loans or not. Various machine learning algorithms were used for this 
-purpose and the XGBoost model performed the best compared to other algorithms. 
+Then the data was used to perform exploratory data analysis and derive inferences.  
+Finally, the machine-ready data were scaled and used for predicting if a person 
+would default on their loans or not. Various machine learning algorithms were used 
+for this purpose, and the XGBoost model performed the best compared to other algorithms. 
 
 # Future Work
-Right now I am a little busy with my Senior year at college, and I wish to in the 
-future make a deep learning algorithm for this data. We can also implement the trained
-algorithms for a Shiny Web application. But most of all, I wish to implement the machine 
-learning algorithms using R Programming. Since the data is also not representative
-one could implement data augmentation to make the data more descriptive. 
+I wish to in the future make a deep learning algorithm for this data. We can also 
+implement the trained algorithms for a Shiny Web application. However, most of all, 
+I wish to implement the machine learning algorithms using R Programming. Since the 
+data is also not representative one could implement data augmentation to make the 
+data more descriptive. 
 
 # References
 
