@@ -1,10 +1,10 @@
-# German Credit Risk Modelling
+# Credit Risk Analysis and Predictive Modelling
 
 ![](https://www.db.com/contentAsset/raw-data/759b91c0-0f6a-4699-9d2a-46fddbd69cbf/fileAsset?language_id=1)
 
 
 #### PROJECT LINK 
-*To visit the project and get the report please visit:* **[GERMAN CREDIT RISK REPORT](https://rpubs.com/ableryder_9wj/814972)**
+*To visit the project and get the report please visit:* **[Credit Risk Analysis REPORT](https://rpubs.com/ableryder_9wj/814972)**
 
 
 ### Abstract
